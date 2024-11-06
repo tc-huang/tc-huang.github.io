@@ -50,3 +50,32 @@ header:
       tr      : &TR       Hakkında
       # @end locale config
     url: /about.html
+  
+  - title: GitHub
+    url:  https://github.com/tc-huang
+  
+  - title: ROS2
+    url:  category/ros2/ros2.html
+  
+  - title: AI Robotics
+    url:  category/ai_robotics/ai_robotics.html
+
+categories:
+  - title:      Categories
+    children:
+      - title:  ROS2
+        url:    /category/ros2/ros2.html
+      - title:  AI Robotics
+        url:    /category/ai_robotics/ai_robotics.html
+
+ai_robotics:
+  - title:      AI Robotics
+    children:
+      - title:  Policy
+      - title:  Hardware
+
+ros2:
+  - title:      ROS2
+    children:
+      - title:  Python
+      - title:  C++
