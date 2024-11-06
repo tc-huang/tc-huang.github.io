@@ -26,4 +26,5 @@ _site/
 .jekyll-metadata
 .jekyll-cache/
 
-logseq/bak
+logseq
+journals
