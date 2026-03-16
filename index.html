@@ -10,11 +10,11 @@
       theme: {
         extend: {
           colors: {
-            navy: '#0F172A',
-            'navy-light': '#1E293B',
-            'navy-border': '#334155',
-            accent: '#38BDF8',
-            'accent-dim': '#0EA5E9',
+            surface: '#FAFAFA',
+            'surface-alt': '#F1F5F9',
+            border: '#E2E8F0',
+            accent: '#0EA5E9',
+            'accent-dim': '#0284C7',
           },
           fontFamily: {
             sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -29,16 +29,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
-    body { background-color: #0F172A; color: #E2E8F0; }
+    body { background-color: #FAFAFA; color: #1E293B; }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0F172A; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: #F1F5F9; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
 
     /* Accent gradient text */
     .gradient-text {
-      background: linear-gradient(135deg, #38BDF8, #818CF8);
+      background: linear-gradient(135deg, #0EA5E9, #6366F1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -66,7 +66,7 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: #38BDF8;
+      background: #0EA5E9;
       transition: width 0.3s ease;
     }
     .nav-link:hover::after { width: 100%; }
@@ -77,8 +77,8 @@
     }
     .card:hover {
       transform: translateY(-4px);
-      border-color: #38BDF8;
-      box-shadow: 0 8px 32px rgba(56, 189, 248, 0.12);
+      border-color: #0EA5E9;
+      box-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
     }
 
     /* Social icon hover */
@@ -86,7 +86,7 @@
       transition: color 0.2s ease, transform 0.2s ease;
     }
     .social-icon:hover {
-      color: #38BDF8;
+      color: #0EA5E9;
       transform: translateY(-2px);
     }
 
@@ -95,8 +95,8 @@
       transition: color 0.2s ease, background 0.2s ease;
     }
     .lang-btn.active {
-      color: #38BDF8;
-      background: rgba(56, 189, 248, 0.1);
+      color: #0EA5E9;
+      background: rgba(14, 165, 233, 0.1);
     }
 
     /* Timeline */
@@ -108,9 +108,9 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #38BDF8;
+      background: #0EA5E9;
       transform: translateX(-50%);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
     }
 
     /* Skill tags */
@@ -120,24 +120,24 @@
       border-radius: 9999px;
       font-size: 0.8rem;
       font-family: 'JetBrains Mono', monospace;
-      background: rgba(51, 65, 85, 0.5);
-      border: 1px solid #334155;
-      color: #94A3B8;
+      background: rgba(241, 245, 249, 0.8);
+      border: 1px solid #CBD5E1;
+      color: #475569;
       transition: border-color 0.2s, color 0.2s;
     }
     .skill-tag:hover {
-      border-color: #38BDF8;
-      color: #E2E8F0;
+      border-color: #0EA5E9;
+      color: #1E293B;
     }
     .skill-tag-accent {
-      background: rgba(56, 189, 248, 0.08);
-      border-color: rgba(56, 189, 248, 0.3);
-      color: #7DD3FC;
+      background: rgba(14, 165, 233, 0.06);
+      border-color: rgba(14, 165, 233, 0.3);
+      color: #0284C7;
     }
     .skill-tag-accent:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: #38BDF8;
-      color: #BAE6FD;
+      background: rgba(14, 165, 233, 0.12);
+      border-color: #0EA5E9;
+      color: #0369A1;
     }
 
     /* Project tags */
@@ -147,9 +147,9 @@
       border-radius: 4px;
       font-size: 0.72rem;
       font-family: 'JetBrains Mono', monospace;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      color: #38BDF8;
+      background: rgba(14, 165, 233, 0.07);
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      color: #0284C7;
     }
 
     /* Hero cursor blink */
@@ -157,7 +157,7 @@
       display: inline-block;
       width: 2px;
       height: 1.1em;
-      background: #38BDF8;
+      background: #0EA5E9;
       margin-left: 2px;
       vertical-align: text-bottom;
       animation: blink 1s step-end infinite;
@@ -166,23 +166,84 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+
+    /* ── Scroll Indicator ── */
+    #scroll-indicator {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+    @media (max-width: 1023px) {
+      #scroll-indicator { display: none; }
+    }
+
+    .scroll-dot-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .scroll-dot-label {
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #94A3B8;
+      opacity: 0;
+      transform: translateX(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .scroll-dot-btn:hover .scroll-dot-label,
+    .scroll-dot-btn.active .scroll-dot-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .scroll-dot-btn.active .scroll-dot-label {
+      color: #0EA5E9;
+    }
+    .scroll-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #CBD5E1;
+      transition: background 0.25s ease, transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .scroll-dot-btn:hover .scroll-dot {
+      background: #94A3B8;
+      transform: scale(1.2);
+    }
+    .scroll-dot-btn.active .scroll-dot {
+      background: #0EA5E9;
+      transform: scale(1.3);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+    }
   </style>
 </head>
 <body class="font-sans antialiased">
 
   <!-- ─── Navbar ─── -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-navy/90 backdrop-blur-md border-b border-navy-border">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
       <a href="#hero" class="font-mono text-sm text-accent tracking-widest">tc-huang</a>
       <div class="flex items-center gap-6">
-        <div class="hidden sm:flex items-center gap-6 text-sm text-slate-400">
-          <a href="#about"    class="nav-link hover:text-white transition-colors" data-zh="關於" data-en="About">關於</a>
-          <a href="#skills"   class="nav-link hover:text-white transition-colors" data-zh="技能" data-en="Skills">技能</a>
-          <a href="#projects" class="nav-link hover:text-white transition-colors" data-zh="作品" data-en="Projects">作品</a>
-          <a href="#contact"  class="nav-link hover:text-white transition-colors" data-zh="聯絡" data-en="Contact">聯絡</a>
+        <div class="hidden sm:flex items-center gap-6 text-sm text-slate-500">
+          <a href="#about"    class="nav-link hover:text-slate-900 transition-colors" data-zh="關於" data-en="About">關於</a>
+          <a href="#skills"   class="nav-link hover:text-slate-900 transition-colors" data-zh="技能" data-en="Skills">技能</a>
+          <a href="#projects" class="nav-link hover:text-slate-900 transition-colors" data-zh="作品" data-en="Projects">作品</a>
+          <a href="#contact"  class="nav-link hover:text-slate-900 transition-colors" data-zh="聯絡" data-en="Contact">聯絡</a>
         </div>
         <!-- Language Toggle -->
-        <div class="flex items-center gap-1 bg-navy-light rounded-full px-1 py-1 border border-navy-border text-xs font-mono">
+        <div class="flex items-center gap-1 bg-slate-100 rounded-full px-1 py-1 border border-slate-200 text-xs font-mono">
           <button id="btn-zh" class="lang-btn active rounded-full px-3 py-1" onclick="setLang('zh')">中文</button>
           <button id="btn-en" class="lang-btn rounded-full px-3 py-1 text-slate-400" onclick="setLang('en')">EN</button>
         </div>
@@ -190,18 +251,42 @@
     </div>
   </nav>
 
+  <!-- ─── Scroll Indicator ─── -->
+  <nav id="scroll-indicator" aria-label="Section navigation">
+    <button class="scroll-dot-btn active" data-target="hero" onclick="scrollToSection('hero')">
+      <span class="scroll-dot-label" data-zh="首頁" data-en="Home">首頁</span>
+      <span class="scroll-dot"></span>
+    </button>
+    <button class="scroll-dot-btn" data-target="about" onclick="scrollToSection('about')">
+      <span class="scroll-dot-label" data-zh="關於" data-en="About">關於</span>
+      <span class="scroll-dot"></span>
+    </button>
+    <button class="scroll-dot-btn" data-target="skills" onclick="scrollToSection('skills')">
+      <span class="scroll-dot-label" data-zh="技能" data-en="Skills">技能</span>
+      <span class="scroll-dot"></span>
+    </button>
+    <button class="scroll-dot-btn" data-target="projects" onclick="scrollToSection('projects')">
+      <span class="scroll-dot-label" data-zh="作品" data-en="Projects">作品</span>
+      <span class="scroll-dot"></span>
+    </button>
+    <button class="scroll-dot-btn" data-target="contact" onclick="scrollToSection('contact')">
+      <span class="scroll-dot-label" data-zh="聯絡" data-en="Contact">聯絡</span>
+      <span class="scroll-dot"></span>
+    </button>
+  </nav>
+
   <!-- ─── Hero ─── -->
   <section id="hero" class="min-h-screen flex flex-col items-center justify-center px-6 pt-16">
     <div class="max-w-3xl w-full text-center space-y-6">
       <p class="font-mono text-accent text-sm tracking-widest section-fade" data-zh="您好，我是" data-en="Hi, I'm">您好，我是</p>
       <h1 class="text-5xl sm:text-6xl font-bold tracking-tight section-fade" style="transition-delay:0.1s">
-        <span class="text-white" data-zh="黃子峻" data-en="HUANG TZU-CHUN">黃子峻</span>
+        <span class="text-slate-900" data-zh="黃子峻" data-en="HUANG TZU-CHUN">黃子峻</span>
       </h1>
-      <h2 class="text-xl sm:text-2xl font-light text-slate-400 section-fade" style="transition-delay:0.2s">
+      <h2 class="text-xl sm:text-2xl font-light text-slate-500 section-fade" style="transition-delay:0.2s">
         <span data-zh="AI 機器人研究者" data-en="AI Robotics Researcher">AI 機器人研究者</span>
         <span class="cursor"></span>
       </h2>
-      <p class="text-slate-400 max-w-xl mx-auto leading-relaxed section-fade" style="transition-delay:0.3s"
+      <p class="text-slate-500 max-w-xl mx-auto leading-relaxed section-fade" style="transition-delay:0.3s"
          data-zh="資訊科學碩士，專注於人工智慧與機器人學的交叉領域，致力於將研究成果轉化為實際應用。"
          data-en="M.S. in Computer Science, focused on the intersection of artificial intelligence and robotics, dedicated to translating research into real-world applications.">
         資訊科學碩士，專注於人工智慧與機器人學的交叉領域，致力於將研究成果轉化為實際應用。
@@ -234,18 +319,18 @@
       <!-- CTA -->
       <div class="flex items-center justify-center gap-4 pt-4 section-fade" style="transition-delay:0.5s">
         <a href="#about"
-           class="px-6 py-2.5 rounded-full bg-accent text-navy font-semibold text-sm hover:bg-sky-300 transition-colors"
+           class="px-6 py-2.5 rounded-full bg-accent text-white font-semibold text-sm hover:bg-sky-400 transition-colors"
            data-zh="了解更多" data-en="Learn More">了解更多</a>
         <a href="#contact"
-           class="px-6 py-2.5 rounded-full border border-navy-border text-slate-300 text-sm hover:border-accent hover:text-accent transition-colors"
+           class="px-6 py-2.5 rounded-full border border-slate-300 text-slate-600 text-sm hover:border-accent hover:text-accent transition-colors"
            data-zh="聯絡我" data-en="Contact Me">聯絡我</a>
       </div>
     </div>
 
     <!-- Scroll hint -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-      <span class="text-xs font-mono text-slate-500">scroll</span>
-      <div class="w-px h-8 bg-gradient-to-b from-slate-500 to-transparent"></div>
+      <span class="text-xs font-mono text-slate-400">scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-slate-400 to-transparent"></div>
     </div>
   </section>
 
@@ -254,7 +339,7 @@
     <div class="max-w-3xl mx-auto section-fade">
       <h2 class="text-xs font-mono text-accent tracking-widest mb-8" data-zh="01. 關於我" data-en="01. About">01. 關於我</h2>
       <div class="grid sm:grid-cols-5 gap-12 items-start">
-        <div class="sm:col-span-3 space-y-4 text-slate-400 leading-relaxed">
+        <div class="sm:col-span-3 space-y-4 text-slate-600 leading-relaxed">
           <p data-zh="我是黃子峻，資訊科學碩士，專攻 AI 機器人學領域。我對於讓機器能夠感知、理解並與真實世界互動抱有濃厚熱情，致力於推動智慧系統的研究與開發。"
              data-en="I'm Huang Tzu-Chun, a Computer Science master's graduate specializing in AI robotics. I'm passionate about enabling machines to perceive, understand, and interact with the real world, and dedicated to advancing intelligent systems research and development.">
             我是黃子峻，資訊科學碩士，專攻 AI 機器人學領域。我對於讓機器能夠感知、理解並與真實世界互動抱有濃厚熱情，致力於推動智慧系統的研究與開發。
@@ -265,17 +350,17 @@
           </p>
         </div>
         <div class="sm:col-span-2">
-          <div class="bg-navy-light border border-navy-border rounded-xl p-5 space-y-3 font-mono text-sm">
-            <div class="flex items-center gap-2 text-slate-500 text-xs mb-4">
-              <span class="w-2 h-2 rounded-full bg-red-500/70"></span>
-              <span class="w-2 h-2 rounded-full bg-yellow-500/70"></span>
-              <span class="w-2 h-2 rounded-full bg-green-500/70"></span>
+          <div class="bg-slate-100 border border-slate-200 rounded-xl p-5 space-y-3 font-mono text-sm">
+            <div class="flex items-center gap-2 text-slate-400 text-xs mb-4">
+              <span class="w-2 h-2 rounded-full bg-red-400/70"></span>
+              <span class="w-2 h-2 rounded-full bg-yellow-400/70"></span>
+              <span class="w-2 h-2 rounded-full bg-green-400/70"></span>
             </div>
-            <div><span class="text-accent">const</span> <span class="text-sky-300">profile</span> <span class="text-slate-400">= &#123;</span></div>
-            <div class="pl-4 text-slate-400"><span class="text-indigo-300">degree</span><span>: </span><span class="text-emerald-400">"M.S. CS"</span>,</div>
-            <div class="pl-4 text-slate-400"><span class="text-indigo-300">field</span><span>: </span><span class="text-emerald-400">"AI Robotics"</span>,</div>
-            <div class="pl-4 text-slate-400"><span class="text-indigo-300">status</span><span>: </span><span class="text-emerald-400">"Open to work"</span>,</div>
-            <div class="text-slate-400">&#125;</div>
+            <div><span class="text-sky-600">const</span> <span class="text-sky-500">profile</span> <span class="text-slate-500">= &#123;</span></div>
+            <div class="pl-4 text-slate-500"><span class="text-indigo-500">degree</span><span>: </span><span class="text-emerald-600">"M.S. CS"</span>,</div>
+            <div class="pl-4 text-slate-500"><span class="text-indigo-500">field</span><span>: </span><span class="text-emerald-600">"AI Robotics"</span>,</div>
+            <div class="pl-4 text-slate-500"><span class="text-indigo-500">status</span><span>: </span><span class="text-emerald-600">"Open to work"</span>,</div>
+            <div class="text-slate-500">&#125;</div>
           </div>
         </div>
       </div>
@@ -283,14 +368,14 @@
   </section>
 
   <!-- ─── Skills ─── -->
-  <section id="skills" class="py-24 px-6 bg-navy-light/30">
+  <section id="skills" class="py-24 px-6 bg-slate-50">
     <div class="max-w-3xl mx-auto section-fade">
       <h2 class="text-xs font-mono text-accent tracking-widest mb-10" data-zh="02. 技能" data-en="02. Skills">02. 技能</h2>
       <div class="space-y-8">
 
         <!-- Languages -->
         <div>
-          <p class="text-xs font-mono text-slate-500 tracking-widest mb-3 uppercase"
+          <p class="text-xs font-mono text-slate-400 tracking-widest mb-3 uppercase"
              data-zh="語言" data-en="Languages">語言</p>
           <div class="flex flex-wrap gap-2">
             <span class="skill-tag">Python</span>
@@ -301,7 +386,7 @@
 
         <!-- Frameworks & Libraries -->
         <div>
-          <p class="text-xs font-mono text-slate-500 tracking-widest mb-3 uppercase"
+          <p class="text-xs font-mono text-slate-400 tracking-widest mb-3 uppercase"
              data-zh="框架與函式庫" data-en="Frameworks & Libraries">框架與函式庫</p>
           <div class="flex flex-wrap gap-2">
             <span class="skill-tag">ROS 2</span>
@@ -312,7 +397,7 @@
 
         <!-- Research Areas -->
         <div>
-          <p class="text-xs font-mono text-slate-500 tracking-widest mb-3 uppercase"
+          <p class="text-xs font-mono text-slate-400 tracking-widest mb-3 uppercase"
              data-zh="研究領域" data-en="Research Areas">研究領域</p>
           <div class="flex flex-wrap gap-2">
             <span class="skill-tag skill-tag-accent" data-zh="機器人學" data-en="Robotics">機器人學</span>
@@ -323,7 +408,7 @@
 
         <!-- Tools -->
         <div>
-          <p class="text-xs font-mono text-slate-500 tracking-widest mb-3 uppercase"
+          <p class="text-xs font-mono text-slate-400 tracking-widest mb-3 uppercase"
              data-zh="工具" data-en="Tools">工具</p>
           <div class="flex flex-wrap gap-2">
             <span class="skill-tag">Linux</span>
@@ -343,31 +428,31 @@
 
       <!-- Research Projects -->
       <div class="mb-12 section-fade">
-        <p class="text-xs font-mono text-slate-500 tracking-widest mb-6 uppercase flex items-center gap-3"
+        <p class="text-xs font-mono text-slate-400 tracking-widest mb-6 uppercase flex items-center gap-3"
            data-zh="研究專案" data-en="Research">
           研究專案
-          <span class="flex-1 h-px bg-navy-border"></span>
+          <span class="flex-1 h-px bg-slate-200"></span>
         </p>
         <div class="space-y-4">
 
           <!-- Research Card -->
-          <article class="card bg-navy-light border border-navy-border rounded-xl p-6">
+          <article class="card bg-white border border-slate-200 rounded-xl p-6">
             <div class="flex items-start justify-between gap-4 mb-3">
               <div class="flex items-center gap-2">
                 <!-- Paper icon -->
                 <svg class="text-accent shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
                 </svg>
-                <h3 class="text-white font-medium"
+                <h3 class="text-slate-800 font-medium"
                     data-zh="研究專案標題" data-en="Research Project Title">研究專案標題</h3>
               </div>
-              <a href="#" class="shrink-0 text-slate-500 hover:text-accent transition-colors" aria-label="View paper">
+              <a href="#" class="shrink-0 text-slate-400 hover:text-accent transition-colors" aria-label="View paper">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
                 </svg>
               </a>
             </div>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4"
+            <p class="text-slate-500 text-sm leading-relaxed mb-4"
                data-zh="研究摘要：簡述此專案的研究問題、方法與主要貢獻。"
                data-en="Research summary: briefly describe the research problem, methodology, and key contributions of this project.">
               研究摘要：簡述此專案的研究問題、方法與主要貢獻。
@@ -384,30 +469,30 @@
 
       <!-- GitHub Projects -->
       <div class="section-fade">
-        <p class="text-xs font-mono text-slate-500 tracking-widest mb-6 uppercase flex items-center gap-3"
+        <p class="text-xs font-mono text-slate-400 tracking-widest mb-6 uppercase flex items-center gap-3"
            data-zh="開源專案" data-en="Open Source">
           開源專案
-          <span class="flex-1 h-px bg-navy-border"></span>
+          <span class="flex-1 h-px bg-slate-200"></span>
         </p>
         <div class="space-y-4">
 
           <!-- GitHub Card -->
-          <article class="card bg-navy-light border border-navy-border rounded-xl p-6">
+          <article class="card bg-white border border-slate-200 rounded-xl p-6">
             <div class="flex items-start justify-between gap-4 mb-3">
               <div class="flex items-center gap-2">
                 <!-- GitHub icon -->
                 <svg class="text-accent shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
                 </svg>
-                <h3 class="text-white font-medium font-mono text-sm">repo-name</h3>
+                <h3 class="text-slate-800 font-medium font-mono text-sm">repo-name</h3>
               </div>
-              <a href="#" class="shrink-0 text-slate-500 hover:text-accent transition-colors" aria-label="View on GitHub">
+              <a href="#" class="shrink-0 text-slate-400 hover:text-accent transition-colors" aria-label="View on GitHub">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
                 </svg>
               </a>
             </div>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4"
+            <p class="text-slate-500 text-sm leading-relaxed mb-4"
                data-zh="專案簡述：說明此開源專案的功能與用途。"
                data-en="Project description: explain the functionality and purpose of this open source project.">
               專案簡述：說明此開源專案的功能與用途。
@@ -417,7 +502,7 @@
                 <span class="proj-tag">Python</span>
                 <span class="proj-tag">ROS 2</span>
               </div>
-              <div class="flex items-center gap-1 text-slate-500 text-xs font-mono">
+              <div class="flex items-center gap-1 text-slate-400 text-xs font-mono">
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 4.517 1.48-8.279L0 9.306l8.332-1.151z"/>
                 </svg>
@@ -433,21 +518,21 @@
   </section>
 
   <!-- ─── Contact ─── -->
-  <section id="contact" class="py-24 px-6">
+  <section id="contact" class="py-24 px-6 bg-slate-50">
     <div class="max-w-3xl mx-auto text-center section-fade">
       <h2 class="text-xs font-mono text-accent tracking-widest mb-8" data-zh="04. 聯絡" data-en="04. Contact">04. 聯絡</h2>
-      <h3 class="text-3xl font-bold text-white mb-4"
+      <h3 class="text-3xl font-bold text-slate-900 mb-4"
           data-zh="讓我們聊聊" data-en="Let's Connect">讓我們聊聊</h3>
-      <p class="text-slate-400 max-w-md mx-auto mb-10"
+      <p class="text-slate-500 max-w-md mx-auto mb-10"
          data-zh="無論是合作機會、研究討論，或只是想打個招呼，我的信箱隨時開放。"
          data-en="Whether it's a collaboration, a research discussion, or just a hello — my inbox is always open.">
         無論是合作機會、研究討論，或只是想打個招呼，我的信箱隨時開放。
       </p>
       <a href="mailto:your@email.com"
-         class="inline-block px-8 py-3 rounded-full border border-accent text-accent hover:bg-accent hover:text-navy font-semibold transition-colors"
+         class="inline-block px-8 py-3 rounded-full border border-accent text-accent hover:bg-accent hover:text-white font-semibold transition-colors"
          data-zh="寄信給我" data-en="Say Hello">寄信給我</a>
 
-      <div class="flex items-center justify-center gap-6 mt-12 text-slate-500">
+      <div class="flex items-center justify-center gap-6 mt-12 text-slate-400">
         <a href="#" aria-label="GitHub" class="social-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
@@ -473,8 +558,8 @@
   </section>
 
   <!-- ─── Footer ─── -->
-  <footer class="py-8 px-6 border-t border-navy-border text-center">
-    <p class="font-mono text-xs text-slate-600">
+  <footer class="py-8 px-6 border-t border-slate-200 text-center">
+    <p class="font-mono text-xs text-slate-400">
       <span data-zh="設計與開發 by" data-en="Designed & Built by">設計與開發 by</span>
       <span class="text-slate-500"> 黃子峻 / HUANG TZU-CHUN</span>
     </p>
@@ -512,19 +597,31 @@
 
     document.querySelectorAll('.section-fade').forEach(el => observer.observe(el));
 
-    // ── Active nav highlight on scroll ──
+    // ── Active nav + scroll indicator highlight on scroll ──
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    const scrollDotBtns = document.querySelectorAll('.scroll-dot-btn');
 
-    window.addEventListener('scroll', () => {
-      let current = '';
+    function updateActive() {
+      let current = 'hero';
       sections.forEach(section => {
-        if (window.scrollY >= section.offsetTop - 80) current = section.id;
+        if (window.scrollY >= section.offsetTop - 120) current = section.id;
       });
       navLinks.forEach(link => {
-        link.classList.toggle('text-white', link.getAttribute('href') === '#' + current);
+        link.classList.toggle('text-slate-900', link.getAttribute('href') === '#' + current);
       });
-    });
+      scrollDotBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.target === current);
+      });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+
+    // ── Scroll indicator click ──
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
