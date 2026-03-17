@@ -29,6 +29,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
+    /* Ensure fixed navbar doesn't obscure section headings on anchor scroll */
+    html { scroll-padding-top: 64px; }
     body { background-color: #FAFAFA; color: #1E293B; }
 
     /* Scrollbar */
@@ -593,9 +595,21 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.section-fade').forEach(el => observer.observe(el));
+    // Use requestAnimationFrame to ensure layout is complete before observing.
+    // On iOS Safari, IntersectionObserver callbacks may not fire for elements
+    // already in the viewport at load time, so we check manually first.
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.section-fade').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible');
+        } else {
+          observer.observe(el);
+        }
+      });
+    });
 
     // ── Active nav + scroll indicator highlight on scroll ──
     const sections = document.querySelectorAll('section[id]');
@@ -619,8 +633,31 @@
     updateActive();
 
     // ── Scroll indicator click ──
+    // scrollIntoView with smooth behavior has limited support on older iOS Safari.
+    // Fall back to a manual smooth scroll using requestAnimationFrame.
     function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      const target = document.getElementById(id);
+      if (!target) return;
+      const navHeight = 64;
+      const targetY = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      const startY = window.pageYOffset;
+      const diff = targetY - startY;
+      const duration = 500;
+      let startTime = null;
+
+      function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      }
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, startY + diff * easeInOutQuad(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
     }
   </script>
 </body>
